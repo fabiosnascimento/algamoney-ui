@@ -17,8 +17,8 @@
 
   <div class="p-grid">
     <div class="p-grid-12">
-      <p-table [value]="pessoas" [paginator]="true" [rows]="5"
-        [responsive]="true" styleClass="p-datatable-gridlines">
+      <p-table [value]="pessoas" [responsive]="true" [paginator]="true" [rows]="5"
+        styleClass="p-datatable-gridlines">
         <ng-template pTemplate="header">
           <tr>
             <th class="col-data-header">Nome</th>
@@ -44,8 +44,10 @@
             </td>
             <td>
               <span class="p-column-title">Status</span>
-              <a class="p-column-ativo" href="#" pTooltip="{{pessoa.ativo == true ? 'Desativar' : 'Ativar'}}"
-                tooltipPosition="top">{{ pessoa.ativo === true ? "Ativo" : "Inativo"}}</a>
+              <a class="p-column-ativo" href="#" pTooltip="{{pessoa.ativo ? 'Desativar' : 'Ativar'}}"
+                tooltipPosition="top">
+                {{ pessoa.ativo ? "Ativo" : "Inativo"}}
+              </a>
             </td>
             <td class="col-acoes">
               <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
@@ -53,11 +55,13 @@
             </td>
           </tr>
         </ng-template>
-
       </p-table>
-
     </div>
 
+    <div class="p-grid-12">
+      <a class="btn" pButton label="Nova Pessoa"></a>
+
+    </div>
   </div>
 
 </div>
