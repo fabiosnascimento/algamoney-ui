@@ -25,7 +25,7 @@
 
   <div class="p-grid">
     <div class="p-grid-12">
-      <p-table [value]="lancamentos" [paginator]="true" [rows]="2"
+      <p-table [value]="lancamentos" [paginator]="true" [rows]="5"
         [responsive]="true" styleClass="p-datatable-gridlines">
         <ng-template pTemplate="header">
           <tr>
@@ -49,15 +49,15 @@
             </td>
             <td class="col-data">
               <span class="p-column-title">Vencimento</span>
-              {{ lancamento.dataVencimento }}
+              {{ lancamento.dataVencimento | date:'dd/MM/y' }}
             </td>
             <td class="col-data">
               <span class="p-column-title">Pagamento</span>
-              {{ lancamento.dataPagamento }}
+              {{ lancamento.dataPagamento | date:'dd/MM/y' }}
             </td>
             <td class="col-valor">
               <span class="p-column-title">Valor</span>
-              <span [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lancamento.valor }}</span>
+              <span [style.color]="lancamento.tipo === 'DESPESA' ? 'red' : 'blue'">{{ lancamento.valor | currency:'BRL' }}</span>
             </td>
             <td class="col-acoes">
               <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
