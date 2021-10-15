@@ -1,16 +1,16 @@
 <div class="container">
-  <div class="p-grid">
+  <div class="grid">
 
-    <div class="p-grid-12">
+    <div class="col-12">
       <h1>Lançamentos</h1>
     </div>
 
-    <div class="p-grid-12 p-fluid">
+    <div class="col-12 p-fluid">
       <label style="display: block">Descrição</label>
       <input pInputText type="text">
     </div>
 
-    <div class="p-grid-12">
+    <div class="col-12">
       <label style="display: block">Vencimento</label>
       <input pInputText type="text" style="width: 95px;">
 
@@ -18,13 +18,13 @@
       <input pInputText type="text" style="width: 95px;">
     </div>
 
-    <div class="p-grid-12">
+    <div class="col-12">
       <button class="btn" pButton type="submit" label="Pesquisar"></button>
     </div>
   </div>
 
-  <div class="p-grid">
-    <div class="p-grid-12">
+  <div class="grid">
+    <div class="col-12">
       <p-table [value]="lancamentos" [paginator]="true" [rows]="5"
         [responsive]="true" styleClass="p-datatable-gridlines">
         <ng-template pTemplate="header">

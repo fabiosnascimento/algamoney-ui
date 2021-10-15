@@ -26,6 +26,7 @@ th {
 }
 
 @media (min-width: 40em) {
+
   .col-valor-header {
     width: 120px;
   }
