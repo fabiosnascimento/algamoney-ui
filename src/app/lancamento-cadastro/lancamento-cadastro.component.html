@@ -1,5 +1,5 @@
 <div class="container">
-  <form>
+  <form #formControl="ngForm">
 
     <div class="grid">
       <div class="col-12">
@@ -13,8 +13,11 @@
       <div class="col-6 md:col-3 p-fluid">
         <label>Vencimento</label>
         <p-calendar dateFormat="dd/mm/yy"
-          [inline]="false" [readonlyInput]="false"
-          [showIcon]="false"></p-calendar>
+          [inline]="false" [readonlyInput]="false" name="vencimento"
+          [showIcon]="false" ngModel #vencimento="ngModel" [required]="true"></p-calendar>
+
+        <app-message [control]="vencimento.control" error="required"
+          text="Informe uma data de vencimento"></app-message>
       </div>
 
       <div class="col-6 md:col-3 p-fluid">
@@ -27,25 +30,28 @@
         <input pInputText type="text" name="descricao"
           ngModel #descricao="ngModel" required minlength="5">
 
-        <p-message *ngIf="descricao.hasError('required') && descricao.dirty" severity="error"
-          text="Informe uma descrição"></p-message>
-        <p-message *ngIf="descricao.hasError('minlength') && descricao.dirty" severity="error"
-          text="Mínimo de {{ descricao.errors?.minlength.requiredLength }} caracteres."></p-message>
+        <app-message [control]="descricao.control" error="required"
+          text="Informe uma descrição"></app-message>
+        <app-message [control]="descricao.control" error="minlength"
+          text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres."></app-message>
       </div>
 
       <div class="col-12 md:col-3 p-fluid">
         <label>Valor</label>
-        <p-inputNumber mode="currency" currency="BRL" placeholder="0,00"></p-inputNumber>
+        <p-inputNumber name="valor" mode="currency" currency="BRL" placeholder="0,00"
+         ngModel [required]="true"></p-inputNumber>
       </div>
 
       <div class="col-12 md:col-6 p-fluid">
         <label>Categoria</label>
-        <p-dropdown [options]="categorias" placeholder="Selecione"></p-dropdown>
+        <p-dropdown name="categoria" [options]="categorias" placeholder="Selecione"
+          ngModel [required]="true"></p-dropdown>
       </div>
 
       <div class="col-12 md:col-6 p-fluid">
         <label>Pessoa</label>
-        <p-dropdown [options]="pessoas" placeholder="Selecione" [filter]="true"></p-dropdown>
+        <p-dropdown name="pessoa" [options]="pessoas" placeholder="Selecione" [filter]="true"
+          ngModel [required]=true></p-dropdown>
       </div>
 
       <div class="col-12 p-fluid">
@@ -54,7 +60,7 @@
       </div>
 
       <div class="col-12">
-        <button pButton type="submit" label="Salvar"></button>
+        <button pButton type="submit" label="Salvar" [disabled]="formControl.invalid"></button>
         <button pButton type="button" label="Novo" class="p-button-info"></button>
         <a href="javascript:;">Voltar para a pesquisa</a>
       </div>
