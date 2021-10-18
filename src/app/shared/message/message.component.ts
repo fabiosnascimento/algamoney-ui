@@ -3,10 +3,17 @@ import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-message',
-  template: `
-    <p-message *ngIf="temErro()" severity="error" text="{{ text }}"></p-message>
+  template:`
+    <div *ngIf="temErro()" class="p-message p-message-error">
+    {{ text }}
+    </div>
   `,
-  styles: [
+  styles: [`
+    .p-message-error {
+      margin: 0;
+      margin-top: 4px;
+    }
+  `
   ]
 })
 export class MessageComponent  {

@@ -15,6 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
   imports: [
     CommonModule,
     FormsModule,
+
+    SharedModule,
 
     InputTextModule,
     ButtonModule,
