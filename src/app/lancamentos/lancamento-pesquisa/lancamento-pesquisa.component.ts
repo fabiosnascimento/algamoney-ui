@@ -10,6 +10,7 @@ import { Component, OnInit } from '@angular/core';
 
 export class LancamentoPesquisaComponent implements OnInit {
 
+  descricao: string = '';
   lancamentos: any = [];
 
   constructor(private lancamentoService: LancamentoService) {}
@@ -19,7 +20,7 @@ export class LancamentoPesquisaComponent implements OnInit {
   }
 
   pesquisar() {
-    this.lancamentoService.pesquisar()
+    this.lancamentoService.pesquisar({ descricao: this.descricao })
       .then(lancamentos => this.lancamentos = lancamentos);
   }
 }
