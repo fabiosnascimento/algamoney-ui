@@ -1,4 +1,3 @@
-import { LancamentoService } from './lancamentos/lancamento.service';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,14 +8,8 @@ import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
-import { PessoaService } from './pessoas/pessoa.service';
 
-import { MessageService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
-import {ConfirmationService} from 'primeng/api';
-
-import { TranslateLoader, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
@@ -37,9 +30,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LancamentosModule,
     PessoasModule,
 
-    ToastModule,
-    ConfirmDialogModule,
-
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,
@@ -49,11 +39,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
       }),
   ],
   providers: [
-    LancamentoService,
-    PessoaService,
-    MessageService,
-    ConfirmationService,
-    TranslateService
+
   ],
   bootstrap: [AppComponent]
 })
