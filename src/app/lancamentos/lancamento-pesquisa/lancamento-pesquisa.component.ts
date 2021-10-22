@@ -17,7 +17,7 @@ export class LancamentoPesquisaComponent {
   totalRegistros = 0;
   filtro = new LancamentoFiltro();
   lancamentos: any = [];
-  @ViewChild('tabela') grid: { reset: () => void; };
+  @ViewChild('tabela') grid: any;
 
   constructor(
     private lancamentoService: LancamentoService,
