@@ -13,6 +13,8 @@ import { PessoaService } from './pessoas/pessoa.service';
 
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,14 @@ import { ToastModule } from 'primeng/toast';
     LancamentosModule,
     PessoasModule,
 
-    ToastModule
+    ToastModule,
+    ConfirmDialogModule
   ],
   providers: [
     LancamentoService,
     PessoaService,
-    MessageService
+    MessageService,
+    ConfirmationService
   ],
   bootstrap: [AppComponent]
 })
