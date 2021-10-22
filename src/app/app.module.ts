@@ -11,6 +11,9 @@ import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
 import { PessoaService } from './pessoas/pessoa.service';
 
+import { MessageService } from 'primeng/api';
+import { ToastModule } from 'primeng/toast';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,10 +27,13 @@ import { PessoaService } from './pessoas/pessoa.service';
     CoreModule,
     LancamentosModule,
     PessoasModule,
+
+    ToastModule
   ],
   providers: [
     LancamentoService,
-    PessoaService
+    PessoaService,
+    MessageService
   ],
   bootstrap: [AppComponent]
 })
