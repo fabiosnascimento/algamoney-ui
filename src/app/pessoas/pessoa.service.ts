@@ -12,7 +12,7 @@ export class PessoaFiltro {
 })
 export class PessoaService {
 
-  pessoasUrl = "http://localhost:8080/pessoas"
+  pessoasUrl = "http://localhost:8080/pessoas";
 
   constructor(private http: HttpClient) { }
 
