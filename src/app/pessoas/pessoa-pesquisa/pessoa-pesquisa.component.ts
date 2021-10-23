@@ -62,4 +62,22 @@ pesquisar(pagina = 0) {
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
+
+  mudarStatus(pessoa: any) {
+    const status = !pessoa.ativo;
+
+    this.pessoaService.mudarStatus(pessoa.codigo, status)
+      .then(() => {
+        const acao = status ? 'ativada' : 'desativada';
+
+        pessoa.ativo = status;
+
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: `Pessoa ${acao} com sucesso!`
+        });
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+    }
 }
