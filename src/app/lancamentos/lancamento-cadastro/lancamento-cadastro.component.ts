@@ -1,8 +1,10 @@
-import { PessoaService } from './../../pessoas/pessoa.service';
+import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
+import { PessoaService } from './../../pessoas/pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriaService } from './../../categorias/categoria.service';
+import { Lancamento } from 'src/app/core/model';
 
 export interface Categoria {
   codigo: string;
@@ -29,6 +31,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
   categorias: any = [];
   pessoas: any = [];
+  lancamento = new Lancamento();
 
   constructor(
     private categoriaService: CategoriaService,
@@ -39,6 +42,10 @@ export class LancamentoCadastroComponent implements OnInit {
   ngOnInit() {
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  salvar(lancamentoForm: NgForm) {
+    console.log(this.lancamento);
   }
 
   carregarCategorias() {
