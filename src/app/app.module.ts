@@ -25,6 +25,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
 const routes: Routes = [
   { path: 'lancamentos', component: LancamentoPesquisaComponent },
   { path: 'lancamentos/novo', component: LancamentoCadastroComponent },
+  { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
   { path: 'pessoas', component: PessoaPesquisaComponent },
   { path: 'pessoas/nova', component: PessoaCadastroComponent }
 ]
