@@ -84,5 +84,4 @@ export class LancamentoCadastroComponent implements OnInit {
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
-
 }
