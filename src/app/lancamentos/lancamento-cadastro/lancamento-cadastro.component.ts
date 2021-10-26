@@ -74,6 +74,15 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   salvar(lancamentoForm: NgForm) {
+    if (this.editando) {
+      this.atualizarLancamento(lancamentoForm);
+    } else {
+      this.adicionarLancamento(lancamentoForm);
+    }
+  }
+
+
+  adicionarLancamento(lancamentoForm: NgForm) {
     this.lancamentoService.adicionar(this.lancamento)
       .then(() => {
         this.messageService.add({
@@ -87,6 +96,24 @@ export class LancamentoCadastroComponent implements OnInit {
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
+
+  atualizarLancamento(lancamentoForm: NgForm) {
+    this.lancamentoService.atualizar(this.lancamento)
+      .then(lancamento => {
+
+        this.converterStringsParaDatas([lancamento]);
+
+        this.lancamento = lancamento;
+
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Lançamento alterado com sucesso!'
+        })
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
 
   carregarCategorias() {
     return this.categoriaService.listarTodas()
@@ -108,13 +135,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
     for (const lancamento of lancamentos) {
 
-      const data = lancamento.dataVencimento;
-      console.log(data);
-
-
       lancamento.dataVencimento = new Date(lancamento.dataVencimento);
-
-      console.log(lancamento.dataVencimento);
 
       if (lancamento.dataPagamento) {
         lancamento.dataPagamento = new Date(lancamento.dataPagamento);

@@ -81,7 +81,7 @@ export class LancamentoService {
       .append('Authorization', 'Basic YWRtaW5AYWxnYW1vbmV5LmNvbTphZG1pbg==')
       .append('Content-Type', 'application/json');
 
-      return this.http.put<Lancamento>(this.lancamentosUrl, lancamento, { headers })
+      return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento, { headers })
         .toPromise();
   }
 
