@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { LazyLoadEvent, ConfirmationService, MessageService } from 'primeng/api';
 
@@ -11,7 +12,7 @@ import { PessoaFiltro, PessoaService } from './../pessoa.service';
   styleUrls: ['./pessoa-pesquisa.component.css']
 })
 
-export class PessoaPesquisaComponent {
+export class PessoaPesquisaComponent implements OnInit {
 
  totalRegistros = 0;
  filtro = new PessoaFiltro();
@@ -22,8 +23,13 @@ export class PessoaPesquisaComponent {
    private pessoaService: PessoaService,
    private confirmation: ConfirmationService,
    private messageService: MessageService,
-   private errorHandler: ErrorHandlerService
+   private errorHandler: ErrorHandlerService,
+   private title: Title
    ) {}
+
+  ngOnInit(){
+    this.title.setTitle('Pesquisa de pessoas');
+  }
 
 pesquisar(pagina = 0) {
   this.filtro.pagina = pagina;

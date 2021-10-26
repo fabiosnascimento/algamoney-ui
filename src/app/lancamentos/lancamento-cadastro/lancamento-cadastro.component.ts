@@ -1,6 +1,7 @@
 import { NgForm } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { MessageService } from 'primeng/api';
 
@@ -9,7 +10,6 @@ import { PessoaService } from './../../pessoas/pessoa.service';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { CategoriaService } from './../../categorias/categoria.service';
 import { Lancamento } from 'src/app/core/model';
-
 
 export interface Categoria {
   codigo: string;
@@ -45,11 +45,15 @@ export class LancamentoCadastroComponent implements OnInit {
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private title: Title
   ) { }
 
   ngOnInit() {
+
     const codigoLancamento = this.route.snapshot.params['codigo'];
+
+    this.title.setTitle('Novo lançamento');
 
     if (codigoLancamento) {
       this.carregarLancamento(codigoLancamento);
@@ -70,6 +74,7 @@ export class LancamentoCadastroComponent implements OnInit {
         this.converterStringsParaDatas([lancamento]);
 
         this.lancamento = lancamento;
+        this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -112,6 +117,7 @@ export class LancamentoCadastroComponent implements OnInit {
           summary: 'Success',
           detail: 'Lançamento alterado com sucesso!'
         })
+        this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -149,5 +155,9 @@ export class LancamentoCadastroComponent implements OnInit {
         lancamento.dataPagamento = new Date(lancamento.dataPagamento);
       }
     }
+  }
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de lançamento: ${this.lancamento.descricao}`);
   }
 }

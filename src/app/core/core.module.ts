@@ -2,6 +2,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule, DatePipe, registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { RouterModule } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { ToastModule } from 'primeng/toast';
 import { MessageService, ConfirmationService } from 'primeng/api';
@@ -45,6 +46,7 @@ registerLocaleData(localePt, 'pt-BR');
     TranslateService,
 
     ConfirmationService,
+    Title,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
   ]
