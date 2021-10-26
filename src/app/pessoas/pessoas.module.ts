@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedModule } from '../shared/shared.module';
-
 import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 
@@ -31,9 +30,6 @@ import { InputMaskModule } from 'primeng/inputmask';
     TooltipModule,
     InputMaskModule,
   ],
-  exports: [
-    PessoaPesquisaComponent,
-    PessoaCadastroComponent,
-  ]
+  exports: []
 })
 export class PessoasModule { }

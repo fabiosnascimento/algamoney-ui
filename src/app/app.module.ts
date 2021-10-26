@@ -13,6 +13,7 @@ import { PessoasModule } from './pessoas/pessoas.module';
 import { LancamentosModule } from './lancamentos/lancamentos.module';
 import { CoreModule } from './core/core.module';
 import { AppComponent } from './app.component';
+import { PaginaNaoEncontradaComponent } from './core/pagina-nao-encontrada.component';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -28,7 +29,9 @@ const routes: Routes = [
   { path: 'lancamentos/novo', component: LancamentoCadastroComponent },
   { path: 'lancamentos/:codigo', component: LancamentoCadastroComponent },
   { path: 'pessoas', component: PessoaPesquisaComponent },
-  { path: 'pessoas/nova', component: PessoaCadastroComponent }
+  { path: 'pessoas/nova', component: PessoaCadastroComponent },
+  { path: 'pagina-nao-encontrada', component: PaginaNaoEncontradaComponent },
+  { path: '**', redirectTo: 'pagina-nao-encontrada' }
 ]
 
 @NgModule({
