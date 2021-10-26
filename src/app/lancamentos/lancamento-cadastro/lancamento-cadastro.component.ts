@@ -48,10 +48,29 @@ export class LancamentoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.route.snapshot.params['codigo']);
+    const codigoLancamento = this.route.snapshot.params['codigo'];
+
+    if (codigoLancamento) {
+      this.carregarLancamento(codigoLancamento);
+    }
 
     this.carregarCategorias();
     this.carregarPessoas();
+  }
+
+  get editando() {
+    return Boolean(this.lancamento.codigo);
+  }
+
+  carregarLancamento(codigo: number) {
+    this.lancamentoService.buscarPorCodigo(codigo)
+      .then((lancamento: any) => {
+
+        this.converterStringsParaDatas([lancamento]);
+
+        this.lancamento = lancamento;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   salvar(lancamentoForm: NgForm) {
@@ -83,5 +102,23 @@ export class LancamentoCadastroComponent implements OnInit {
         this.pessoas = pessoas.content.map((c: Pessoa) => ({ label: c.nome , value: c.codigo}));
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  private converterStringsParaDatas(lancamentos: Lancamento[]) {
+
+    for (const lancamento of lancamentos) {
+
+      const data = lancamento.dataVencimento;
+      console.log(data);
+
+
+      lancamento.dataVencimento = new Date(lancamento.dataVencimento);
+
+      console.log(lancamento.dataVencimento);
+
+      if (lancamento.dataPagamento) {
+        lancamento.dataPagamento = new Date(lancamento.dataPagamento);
+      }
+    }
   }
 }
