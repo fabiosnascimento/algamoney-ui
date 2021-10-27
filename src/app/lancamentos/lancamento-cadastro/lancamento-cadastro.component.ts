@@ -87,7 +87,6 @@ export class LancamentoCadastroComponent implements OnInit {
     }
   }
 
-
   adicionarLancamento(lancamentoForm: NgForm) {
     this.lancamentoService.adicionar(this.lancamento)
       .then(lancamentoAdicionado => {
@@ -97,8 +96,6 @@ export class LancamentoCadastroComponent implements OnInit {
           detail: 'Lançamento adicionado com sucesso!'
         })
 
-        // lancamentoForm.reset();
-        // this.lancamento = new Lancamento();
         this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo])
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -121,7 +118,6 @@ export class LancamentoCadastroComponent implements OnInit {
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
-
 
   carregarCategorias() {
     return this.categoriaService.listarTodas()
@@ -148,11 +144,13 @@ export class LancamentoCadastroComponent implements OnInit {
   private converterStringsParaDatas(lancamentos: Lancamento[]) {
 
     for (const lancamento of lancamentos) {
+      //Evita bug na hora da edição, adiciona o timezone do usuário
+      let offset = new Date().getTimezoneOffset() * 60000;
 
-      lancamento.dataVencimento = new Date(lancamento.dataVencimento);
+      lancamento.dataVencimento = new Date(new Date(lancamento.dataVencimento).getTime() + offset);
 
       if (lancamento.dataPagamento) {
-        lancamento.dataPagamento = new Date(lancamento.dataPagamento);
+        lancamento.dataPagamento = new Date(new Date(lancamento.dataPagamento).getTime() + offset);
       }
     }
   }

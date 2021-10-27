@@ -1,8 +1,7 @@
 <div class="container">
-  <div class="p-grid">
+  <form autocomplete="off" (ngSubmit)="pesquisar()">
 
-    <form autocomplete="off" (ngSubmit)="pesquisar()">
-
+    <div class="p-grid">
       <div class="p-grid-12">
         <h1>Pessoas</h1>
       </div>
@@ -16,8 +15,8 @@
       <div class="p-grid-12">
         <button class="btn" pButton type="submit" label="Pesquisar"></button>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
 
   <div class="p-grid">
     <div class="p-grid-12">
@@ -58,13 +57,14 @@
             </td>
             <td>
               <span class="p-column-title">Status</span>
-              <a class="p-column-ativo" href="#" pTooltip="{{pessoa.ativo ? 'Desativar' : 'Ativar'}}"
+              <a class="p-column-ativo" routerLink="/pessoas" pTooltip="{{pessoa.ativo ? 'Desativar' : 'Ativar'}}"
                 tooltipPosition="top" (click)="mudarStatus(pessoa)">
                 {{ pessoa.ativo ? "Ativo" : "Inativo"}}
               </a>
             </td>
             <td class="col-acoes">
-              <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"></a>
+              <a pButton icon="pi pi-pencil" pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/pessoas', pessoa.codigo]"></a>
               <button pButton icon="pi pi-trash" pTooltip="Excluir"
                 tooltipPosition="top" (click)="confirmarExclusao(pessoa)"></button>
             </td>
@@ -74,7 +74,7 @@
     </div>
 
     <div class="p-grid-12">
-      <a class="btn" pButton label="Nova Pessoa"></a>
+      <a class="btn" pButton label="Nova Pessoa" routerLink="/pessoas/nova"></a>
     </div>
   </div>
 

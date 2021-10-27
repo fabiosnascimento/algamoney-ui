@@ -5,13 +5,13 @@ import { CommonModule } from '@angular/common';
 import { SharedModule } from '../shared/shared.module';
 import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.component';
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
+import { PessoasRoutingModule } from './pessoas-routing.module';
 
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputMaskModule } from 'primeng/inputmask';
-
 
 @NgModule({
   declarations: [
@@ -29,6 +29,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     TableModule,
     TooltipModule,
     InputMaskModule,
+    PessoasRoutingModule
   ],
   exports: []
 })

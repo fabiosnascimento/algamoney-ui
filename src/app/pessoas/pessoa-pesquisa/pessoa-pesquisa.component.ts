@@ -14,31 +14,31 @@ import { PessoaFiltro, PessoaService } from './../pessoa.service';
 
 export class PessoaPesquisaComponent implements OnInit {
 
- totalRegistros = 0;
- filtro = new PessoaFiltro();
- pessoas: any = [];
- @ViewChild('tabela') grid: any;
+  totalRegistros = 0;
+  filtro = new PessoaFiltro();
+  pessoas: any = [];
+  @ViewChild('tabela') grid: any;
 
- constructor(
-   private pessoaService: PessoaService,
-   private confirmation: ConfirmationService,
-   private messageService: MessageService,
-   private errorHandler: ErrorHandlerService,
-   private title: Title
-   ) {}
+  constructor(
+    private pessoaService: PessoaService,
+    private confirmation: ConfirmationService,
+    private messageService: MessageService,
+    private errorHandler: ErrorHandlerService,
+    private title: Title
+    ) {}
 
   ngOnInit(){
     this.title.setTitle('Pesquisa de pessoas');
   }
 
-pesquisar(pagina = 0) {
-  this.filtro.pagina = pagina;
+  pesquisar(pagina = 0) {
+    this.filtro.pagina = pagina;
 
-  this.pessoaService.pesquisar(this.filtro)
-    .then(resultado => {
-      this.totalRegistros = resultado.total;
-      this.pessoas = resultado.pessoas;
-    })
+    this.pessoaService.pesquisar(this.filtro)
+      .then(resultado => {
+        this.totalRegistros = resultado.total;
+        this.pessoas = resultado.pessoas;
+      })
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
@@ -85,5 +85,5 @@ pesquisar(pagina = 0) {
         });
       })
       .catch(erro => this.errorHandler.handle(erro));
-    }
+  }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 
@@ -21,25 +22,79 @@ export class PessoaCadastroComponent implements OnInit {
     private pessoaService: PessoaService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
+    private route: ActivatedRoute,
+    private router: Router,
     private title: Title
   ) {}
 
   ngOnInit(): void {
-    this.title.setTitle('Nova pessoa')
+
+    const codigoPessoa = this.route.snapshot.params['codigo'];
+
+    this.title.setTitle('Nova pessoa');
+
+    if (codigoPessoa) {
+      this.carregarPessoa(codigoPessoa);
+    }
+  }
+
+  get editando() {
+    return Boolean(this.pessoa.codigo);
+  }
+
+  carregarPessoa(codigo: number) {
+    this.pessoaService.buscaPorCodigo(codigo)
+      .then((pessoa: any) => {
+
+        this.pessoa = pessoa;
+        this.atualizarTituloEdicao();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   salvar(pessoaForm: NgForm) {
+    if (this.editando) {
+      this.atualizarPessoa(pessoaForm);
+    } else {
+      this.adicionarPessoa(pessoaForm)
+    }
+  }
+
+  adicionarPessoa(pessoaForm: NgForm) {
     this.pessoaService.adicionar(this.pessoa)
-      .then(() => {
+      .then((pessoaAdicionada) => {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
           detail: 'Pessoa adicionada com sucesso!'
         })
 
-        pessoaForm.reset();
-        this.pessoa = new Pessoa();
+        this.router.navigate(['/pessoas', pessoaAdicionada.codigo]);
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  atualizarPessoa(pessoaForm: NgForm) {
+    this.pessoaService.atualizar(this.pessoa)
+      .then((pessoa) => {
+
+        this.pessoa = pessoa;
+        this.messageService.add({
+          severity: "success",
+          summary: "Success",
+          detail: "Pessoa alterada com sucesso!"
+        })
+        this.atualizarTituloEdicao();
+      })
+  }
+
+  novo(pessoaForm: NgForm) {
+    pessoaForm.reset(new Pessoa());
+
+    this.router.navigate(['/pessoas/nova']);
+  }
+
+  atualizarTituloEdicao() {
+    this.title.setTitle(`Edição de pessoa: ${this.pessoa.nome}`);
   }
 }
