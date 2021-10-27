@@ -27,7 +27,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule,
 
     CoreModule,
     LancamentosModule,
@@ -40,6 +39,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
           deps: [HttpClient]
       }
       }),
+      AppRoutingModule,
   ],
   providers: [
 

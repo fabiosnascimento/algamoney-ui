@@ -1,8 +1,8 @@
-import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import { LancamentosRoutingModule } from './lancamentos-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { LancamentoPesquisaComponent } from './lancamento-pesquisa/lancamento-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
@@ -26,7 +26,6 @@ import { InputNumberModule } from 'primeng/inputnumber';
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
 
     SharedModule,
 
@@ -39,6 +38,7 @@ import { InputNumberModule } from 'primeng/inputnumber';
     SelectButtonModule,
     DropdownModule,
     InputNumberModule,
+    LancamentosRoutingModule
   ],
   exports: []
 })
