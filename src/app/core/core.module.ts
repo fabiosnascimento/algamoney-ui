@@ -9,6 +9,7 @@ import { MessageService, ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 import { TranslateService } from '@ngx-translate/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from '../pessoas/pessoa.service';
@@ -48,6 +49,7 @@ registerLocaleData(localePt, 'pt-BR');
     TranslateService,
 
     ConfirmationService,
+    JwtHelperService,
     Title,
     DatePipe,
     { provide: LOCALE_ID, useValue: 'pt-BR' }
