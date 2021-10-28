@@ -16,6 +16,7 @@ import { CategoriaService } from '../categorias/categoria.service';
 import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
+import { AuthService } from '../seguranca/auth.service';
 
 registerLocaleData(localePt, 'pt-BR');
 
@@ -41,6 +42,7 @@ registerLocaleData(localePt, 'pt-BR');
     PessoaService,
     CategoriaService,
     ErrorHandlerService,
+    AuthService,
 
     MessageService,
     TranslateService,
