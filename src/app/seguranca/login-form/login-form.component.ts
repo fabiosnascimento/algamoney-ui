@@ -12,7 +12,7 @@ import { AuthService } from '../auth.service';
 export class LoginFormComponent implements OnInit {
 
   constructor(
-    public auth: AuthService,
+    private auth: AuthService,
     private errorHandler: ErrorHandlerService,
     private router: Router
   ) { }
