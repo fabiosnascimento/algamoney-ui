@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-
 import { AuthGuard } from "../seguranca/auth.guard";
 import { PessoaCadastroComponent } from "./pessoa-cadastro/pessoa-cadastro.component";
 import { PessoaPesquisaComponent } from "./pessoa-pesquisa/pessoa-pesquisa.component";
