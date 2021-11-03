@@ -36,7 +36,6 @@ export class LancamentoCadastroComponent implements OnInit {
 
   categorias: any = [];
   pessoas: any = [];
-  // lancamento = new Lancamento();
   formulario: FormGroup;
 
   constructor(
@@ -96,8 +95,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
         this.converterStringsParaDatas([lancamento]);
 
-        // this.lancamento = lancamento;
-        this.formulario.setValue(lancamento)
+        this.formulario.patchValue(lancamento)
         this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -131,8 +129,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
         this.converterStringsParaDatas([lancamento]);
 
-        // this.lancamento = lancamento;
-        this.formulario.setValue(lancamento);
+        this.formulario.patchValue(lancamento);
 
         this.messageService.add({
           severity: 'success',
