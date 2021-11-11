@@ -1,1 +1,32 @@
-<p>relatorio-lancamentos works!</p>
+<div class="container">
+  <div class="grid">
+    <div class="col-12">
+      <h1>Relatório de lançamentos por pessoa</h1>
+    </div>
+
+    <form #f="ngForm" (ngSubmit)="gerar()">
+      <div class="col-12">
+        <label>Vencimento</label>
+        <p-calendar dateFormat="dd/mm/yy" [required]="true"
+          [inputStyle]="{ 'width': '100px', 'margin': '5px' }"
+          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
+          name="periodoInicio" [(ngModel)]="periodoInicio">
+        </p-calendar>
+
+        <label>até</label>
+
+        <p-calendar dateFormat="dd/mm/yy" [required]="true"
+          [inputStyle]="{ 'width': '100px', 'margin': '5px' }"
+          [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
+          name="periodoFim" [(ngModel)]="periodoFim">
+        </p-calendar>
+      </div>
+
+      <div class="col-12">
+        <button pButton type="submit" label="Gerar"
+          [disabled]="f.invalid"></button>
+      </div>
+    </form>
+
+  </div>
+</div>
