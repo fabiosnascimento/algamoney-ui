@@ -11,6 +11,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TranslateService } from '@ngx-translate/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+import { RelatoriosService } from './../relatorios/relatorios.service';
 import { LancamentoService } from '../lancamentos/lancamento.service';
 import { PessoaService } from '../pessoas/pessoa.service';
 import { CategoriaService } from '../categorias/categoria.service';
@@ -46,6 +47,7 @@ registerLocaleData(localePt, 'pt-BR');
     PessoaService,
     CategoriaService,
     DashboardService,
+    RelatoriosService,
     ErrorHandlerService,
     AuthService,
 
