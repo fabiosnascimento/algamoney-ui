@@ -17,6 +17,7 @@ import { PessoaService } from './../pessoa.service';
 export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
+  exibindoFormularioContato = false;
 
   constructor(
     private pessoaService: PessoaService,
@@ -36,6 +37,10 @@ export class PessoaCadastroComponent implements OnInit {
     if (codigoPessoa) {
       this.carregarPessoa(codigoPessoa);
     }
+  }
+
+  prepararNovoContato() {
+    this.exibindoFormularioContato = true;
   }
 
   get editando() {
