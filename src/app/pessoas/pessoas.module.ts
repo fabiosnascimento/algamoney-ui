@@ -7,6 +7,7 @@ import { PessoaPesquisaComponent } from './pessoa-pesquisa/pessoa-pesquisa.compo
 import { PessoaCadastroComponent } from './pessoa-cadastro/pessoa-cadastro.component';
 import { PessoasRoutingModule } from './pessoas-routing.module';
 
+import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -29,6 +30,7 @@ import { InputMaskModule } from 'primeng/inputmask';
     TableModule,
     TooltipModule,
     InputMaskModule,
+    PanelModule,
     PessoasRoutingModule
   ],
   exports: []
