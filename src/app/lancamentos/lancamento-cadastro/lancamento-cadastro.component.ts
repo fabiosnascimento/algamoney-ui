@@ -82,6 +82,10 @@ export class LancamentoCadastroComponent implements OnInit {
     });
   }
 
+  erroUpload(event:any) {
+    this.errorHandler.handle('Erro ao tentar enviar anexo!');
+  }
+
   get nomeAnexo() {
     const nome = this.formulario.get('anexo').value;
 
