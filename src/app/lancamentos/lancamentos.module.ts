@@ -7,6 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { LancamentoPesquisaComponent } from './lancamento-pesquisa/lancamento-pesquisa.component';
 import { LancamentoCadastroComponent } from './lancamento-cadastro/lancamento-cadastro.component';
 
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -41,7 +42,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     DropdownModule,
     InputNumberModule,
     LancamentosRoutingModule,
-    FileUploadModule
+    FileUploadModule,
+    ProgressSpinnerModule
   ],
   exports: []
 })
