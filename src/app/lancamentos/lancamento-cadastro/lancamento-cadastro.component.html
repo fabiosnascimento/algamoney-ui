@@ -64,6 +64,12 @@
           formControlName="observacao"></textarea>
       </div>
 
+      <div class="col-6 col-offset-9 md:col-offset-10 p-fluid">
+        <p-fileUpload name="anexo" mode="basic" [auto]="true" [maxFileSize]="100000000"
+          chooseLabel="Anexar" accept="image/*,application/*"
+          [headers]="uploadHeaders" [url]="urlUploadAnexo"></p-fileUpload>
+      </div>
+
       <div class="col-12">
         <button pButton type="submit" label="Salvar" [disabled]="formulario.invalid"></button>
         <button pButton type="button" label="Novo" class="p-button-info"

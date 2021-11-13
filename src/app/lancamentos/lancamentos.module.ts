@@ -16,6 +16,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputNumberModule } from 'primeng/inputnumber';
+import { FileUploadModule } from 'primeng/fileupload';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { InputNumberModule } from 'primeng/inputnumber';
     SelectButtonModule,
     DropdownModule,
     InputNumberModule,
-    LancamentosRoutingModule
+    LancamentosRoutingModule,
+    FileUploadModule
   ],
   exports: []
 })
