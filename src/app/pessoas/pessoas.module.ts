@@ -14,11 +14,13 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'primeng/tooltip';
 import { InputMaskModule } from 'primeng/inputmask';
+import { PessoaCadastroContatoComponent } from './pessoa-cadastro-contato/pessoa-cadastro-contato.component';
 
 @NgModule({
   declarations: [
     PessoaPesquisaComponent,
-    PessoaCadastroComponent
+    PessoaCadastroComponent,
+    PessoaCadastroContatoComponent
   ],
   imports: [
     CommonModule,
