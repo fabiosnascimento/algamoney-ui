@@ -18,7 +18,7 @@ export class PessoaCadastroComponent implements OnInit {
 
   pessoa = new Pessoa();
   estados: any[];
-  cidades: any[];
+  cidadesList: any[];
   estadoSelecionado: number;
 
   constructor(
@@ -51,8 +51,11 @@ export class PessoaCadastroComponent implements OnInit {
   }
 
   carregarCidades() {
-    this.pessoaService.pesquisarCidades(this.estadoSelecionado).then(lista => {
-      this.cidades = lista.map(c => ({ label: c.nome, value: c.codigo }));
+    this.pessoaService.pesquisarCidades(this.estadoSelecionado).then(cidades => {
+      this.cidadesList = cidades.map(c => ({ label: c.nome, value: c.codigo }));
+      if (this.estadoSelecionado !== this.pessoa.endereco.cidade.estado.codigo) {
+        this.pessoa.endereco.cidade.codigo = null;
+      }
     })
     .catch(erro => this.errorHandler.handle(erro));
   }
@@ -66,6 +69,14 @@ export class PessoaCadastroComponent implements OnInit {
       .then((pessoa: any) => {
 
         this.pessoa = pessoa;
+
+        this.estadoSelecionado = (this.pessoa.endereco.cidade) ?
+                this.pessoa.endereco.cidade.estado.codigo : null;
+
+        if (this.estadoSelecionado) {
+          this.carregarCidades();
+        }
+
         this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
