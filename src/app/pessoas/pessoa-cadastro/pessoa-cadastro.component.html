@@ -76,12 +76,9 @@
 
       <div class="col-12 md:col-6 p-fluid">
         <label>Estado</label>
-        <input pInputText type="text" name="estado"
-          #estado="ngModel" required
-          [(ngModel)]="pessoa.endereco.estado">
 
-        <app-message [control]="estado.control" error="required"
-          text="Informe o estado"></app-message>
+        <p-dropdown placeholder="Selecione..."
+          [filter]="true" [options]="estados"></p-dropdown>
       </div>
 
       <div class="col-12">
