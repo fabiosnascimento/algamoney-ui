@@ -86,6 +86,7 @@ export class PessoaService {
     return this.http.get(this.estadosUrl)
       .toPromise()
       .then();
+
   }
 
   pesquisarCidades(estado: any): Promise<Cidade[]> {

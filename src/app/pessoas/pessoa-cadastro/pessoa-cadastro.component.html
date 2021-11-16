@@ -65,6 +65,13 @@
       </div>
 
       <div class="col-12 md:col-6 p-fluid">
+        <label>Estado</label>
+
+        <p-dropdown placeholder="Selecione..."
+          [filter]="true" [options]="estados"></p-dropdown>
+      </div>
+
+      <div class="col-12 md:col-6 p-fluid">
         <label>Cidade</label>
         <input pInputText type="text" name="cidade"
           #cidade="ngModel" required
@@ -72,13 +79,6 @@
 
         <app-message [control]="cidade.control" error="required"
           text="Informe a cidade"></app-message>
-      </div>
-
-      <div class="col-12 md:col-6 p-fluid">
-        <label>Estado</label>
-
-        <p-dropdown placeholder="Selecione..."
-          [filter]="true" [options]="estados"></p-dropdown>
       </div>
 
       <div class="col-12">
