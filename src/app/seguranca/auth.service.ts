@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
+import * as CryptoJS from 'crypto-js';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +26,21 @@ export class AuthService {
   }
 
   login() {
-    const state = 'abc';
-    const challengeMethod = 'plain';
-    const codeChallenge = 'desafio123';
+    const state = this.gerarStringAleatoria(40);
+    const codeVerifier = this.gerarStringAleatoria(128);
+
+    localStorage.setItem('state', state);
+    localStorage.setItem('codeVerifier', codeVerifier);
+
+    const challengeMethod = 'S256';
+    const codeChallenge = CryptoJS.SHA256(codeVerifier)
+      .toString(CryptoJS.enc.Base64)
+      .replace('/=/g', '')
+      .replace('/\+/g', '')
+      .replace('/\//g', '');
+
     const redirectUri = encodeURIComponent(environment.oauthCallbackUrl);
+
     const clientId = 'angular';
     const scope = 'read write';
     const responseType = 'code';
@@ -112,5 +124,15 @@ export class AuthService {
     if (token) {
       this.armazenarToken(token);
     }
+  }
+
+  private gerarStringAleatoria(tamanho: number) {
+    let resultado = '';
+    // Chars que são URL safe
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    for (let i = 0; i < tamanho; i++) {
+      resultado += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return resultado;
   }
 }
