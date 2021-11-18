@@ -12,7 +12,6 @@ export class AuthService {
 
   oauthTokenUrl: string;
   oauthAuthorizeUrl: string;
-  tokensRevokeUrl: string;
   jwtPayload: any;
 
   constructor(
@@ -91,11 +90,9 @@ export class AuthService {
   }
 
   logout() {
-    return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })
-      .toPromise()
-      .then(() => {
-        this.limparAccessToken();
-      })
+    this.limparAccessToken();
+    localStorage.clear();
+    window.location.href = environment.apiUrl + '/logout?returnTo=' + environment.logoutRedirectToUrl;
   }
 
   obterNovoAccessToken(): Promise<void> {
