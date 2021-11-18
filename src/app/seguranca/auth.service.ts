@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
 
   oauthTokenUrl: string;
+  oauthAuthorizeUrl: string;
   tokensRevokeUrl: string;
   jwtPayload: any;
 
@@ -17,33 +18,32 @@ export class AuthService {
     private http: HttpClient,
     private jwtHelper: JwtHelperService
   ) {
-    this.oauthTokenUrl = `${environment.apiUrl}/oauth/token`;
+    this.oauthTokenUrl = `${environment.apiUrl}/oauth2/token`;
+    this.oauthAuthorizeUrl = `${environment.apiUrl}/oauth2/authorize`;
     this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
     this.carregarToken();
   }
 
-  login(usuario: string, senha: string): Promise<void> {
-    const headers = new HttpHeaders()
-      .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==')
-      .append('Content-Type', 'application/x-www-form-urlencoded');
+  login() {
+    const state = 'abc';
+    const challengeMethod = 'plain';
+    const codeChallenge = 'desafio123';
+    const redirectUri = encodeURIComponent(environment.oauthCallbackUrl);
+    const clientId = 'angular';
+    const scope = 'read write';
+    const responseType = 'code';
 
-    const body = `username=${usuario}&password=${senha}&grant_type=password`;
+    const params = [
+      'response_type=' + responseType,
+      'client_id=' + clientId,
+      'scope=' + scope,
+      'code_challenge=' + codeChallenge,
+      'code_challenge_method=' + challengeMethod,
+      'state=' + state,
+      'redirect_uri=' + redirectUri
+    ]
 
-    return this.http.post<any>(this.oauthTokenUrl, body, { headers, withCredentials: true })
-      .toPromise()
-      .then(response => {
-        this.armazenarToken(response.access_token);
-      })
-      .catch(response => {
-        if (response.status === 400) {
-          const responseJson = response;
-
-          if (responseJson.error.error === 'invalid_grant') {
-            return Promise.reject('Usuário ou senha inválida!')
-          }
-        }
-        return Promise.reject(response);
-      });
+    window.location.href = this.oauthAuthorizeUrl + '?' + params.join('&');
   }
 
   logout() {

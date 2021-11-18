@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
 
+import { AuthService } from 'src/app/seguranca/auth.service';
 import { NotAuthenticatedError } from '../seguranca/money-http-interceptor';
 
 @Injectable({
@@ -13,6 +14,7 @@ export class ErrorHandlerService {
 
   constructor(
     private messageService: MessageService,
+    private authService: AuthService,
     private router: Router
   ) { }
 
@@ -24,7 +26,7 @@ export class ErrorHandlerService {
 
     } else if (errorResponse instanceof NotAuthenticatedError) {
       msg = 'Sua sessão expirou!';
-      this.router.navigate(['/login']);
+      this.authService.login();
 
     } else if (errorResponse instanceof HttpErrorResponse
         && errorResponse.status >= 400 && errorResponse.status <= 499) {
