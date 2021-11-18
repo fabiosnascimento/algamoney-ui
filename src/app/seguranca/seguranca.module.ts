@@ -11,6 +11,7 @@ import { AuthGuard } from './auth.guard';
 import { MoneyHttpInterceptor } from './money-http-interceptor';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { environment } from 'src/environments/environment';
+import { AuthorizedComponent } from './authorized/authorized.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
@@ -42,6 +43,9 @@ export function tokenGetter(): string {
       multi: true
     },
     AuthGuard
+  ],
+  declarations: [
+    AuthorizedComponent
   ]
 })
 export class SegurancaModule {

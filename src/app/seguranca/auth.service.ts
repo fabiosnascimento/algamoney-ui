@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -21,7 +21,6 @@ export class AuthService {
   ) {
     this.oauthTokenUrl = `${environment.apiUrl}/oauth2/token`;
     this.oauthAuthorizeUrl = `${environment.apiUrl}/oauth2/authorize`;
-    this.tokensRevokeUrl = `${environment.apiUrl}/tokens/revoke`;
     this.carregarToken();
   }
 
@@ -58,6 +57,39 @@ export class AuthService {
     window.location.href = this.oauthAuthorizeUrl + '?' + params.join('&');
   }
 
+  obterNovoAccessTokenComCode(code: string, state: string) : Promise<any> {
+    const stateSalvo = localStorage.getItem('state');
+
+    if (stateSalvo !== state) {
+      return Promise.reject(null);
+    }
+
+    const codeVerifier = localStorage.getItem('codeVerifier')!;
+
+    const payload = new HttpParams()
+      .append('grant_type', 'authorization_code')
+      .append('code', code)
+      .append('redirect_uri', environment.oauthCallbackUrl)
+      .append('code_verifier', codeVerifier);
+
+    const headers = new HttpHeaders()
+     .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==')
+     .append('Content-Type', 'application/x-www-form-urlencoded');
+
+    return this.http.post<any>(this.oauthTokenUrl, payload, { headers })
+      .toPromise()
+      .then((response:any) => {
+        this.armazenarToken(response['access_token']);
+        this.armazenarRefreshToken(response['refresh_token']);
+        console.log('Novo access token criado!');
+        return Promise.resolve(null);
+      })
+      .catch((response:any) => {
+        console.log('Erro ao gerar o token com o code.', response);
+        return Promise.resolve();
+      });
+  }
+
   logout() {
     return this.http.delete(this.tokensRevokeUrl, { withCredentials: true })
       .toPromise()
@@ -71,21 +103,23 @@ export class AuthService {
       .append('Authorization', 'Basic YW5ndWxhcjpAbmd1bEByMA==')
       .append('Content-Type', 'application/x-www-form-urlencoded');
 
-    const body = 'grant_type=refresh_token';
+    const payload = new HttpParams()
+      .append('grant_type', 'refresh_token')
+      .append('refresh_token', localStorage.getItem('refreshToken')!)
 
-    return this.http.post<any>(this.oauthTokenUrl, body, { headers, withCredentials: true })
+    return this.http.post<any>(this.oauthTokenUrl, payload, { headers })
       .toPromise()
-      .then(response => {
-        this.armazenarToken(response.access_token);
-
+      .then((response:any) => {
+        this.armazenarToken(response['access_token']);
+        this.armazenarRefreshToken(response['refresh_token']);
         console.log('Novo access token criado!');
 
-        return Promise.resolve(null);
+        return Promise.resolve();
       })
-      .catch(response => {
+      .catch((response:any) => {
         console.log('Erro ao renovar token.', response);
-        return Promise.resolve(null);
-      })
+        return Promise.resolve();
+      });
   }
 
   limparAccessToken() {
@@ -116,6 +150,10 @@ export class AuthService {
   private armazenarToken(token: string) {
     this.jwtPayload = this.jwtHelper.decodeToken(token);
     localStorage.setItem('token', token);
+  }
+
+  private armazenarRefreshToken(refreshToken: string) {
+    localStorage.setItem('refreshToken', refreshToken);
   }
 
   private carregarToken() {
