@@ -4,7 +4,7 @@
 
 # Sobre o projeto
 
-https://springb-algamoney-api.herokuapp.com/
+https://angular-algamoney-ui.herokuapp.com/
 ```bash
 Usuário: admin@algamoney.com
 Senha: admin
